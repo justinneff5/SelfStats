@@ -11,6 +11,16 @@ const happinessSchema = new Schema({
     time: { type: Date, default: Date.now }
 });
 
+const contentSchema = new Schema({
+    level: { type: Number },
+    time: { type: Date, default: Date.now }
+});
+
+const satisfiedSchema = new Schema({
+    level: { type: Number },
+    time: { type: Date, default: Date.now }
+})
+
 const boredSchema = new Schema({
     level: { type: Number },
     time: { type: Date, default: Date.now }
@@ -36,6 +46,12 @@ const clearheadedSchema = new Schema({
     time: { type: Date, default: Date.now }
 });
 
+//** MOOD LEVEL REPLACES ALL ABOVE */
+const moodLevelSchema = new Schema({
+    level: { type: Number },
+    time: { type: Date, default: Date.now }
+});
+
 const paceOfTimeSchema = new Schema({
     pace: { type: Number }, //scale 1-5
     time: { type: Date, default: Date.now }
@@ -54,7 +70,7 @@ const foodSchema = new Schema({
     time: {
         type: Date, default: Date.now
     },
-    estimateCalories: { type: Number, default: 0 } //soon call some api? 
+    estimated_calories: { type: Number, default: 0 } //soon call some api? 
 });
 
 const waterSchema = new Schema({
@@ -63,18 +79,23 @@ const waterSchema = new Schema({
 });
 
 const poopSchema = new Schema({
-    timeSpent: { type: Number },
+    time_spent: { type: Number },
     time: { type: Date, default: Date.now },
     quality: { type: Number } //10
 });
 
 const drugUseSchema = new Schema({
+    type: {type: String},
     consumed: { type: Boolean },
     amount: {
         type: Number, default: function () {
             if (!this.consumed) {
                 return 0;
-            }
+            } else if (this.type === 'adderall') {
+                return 30;
+            } else if (this.type === 'lamitrogine') {
+                return 200;
+            } else { return null; }
         }, //contextual per use -- adderall, default 30mg xr
         time: { type: Date, default: Date.now }
     }
@@ -101,11 +122,20 @@ const timeOutsideSchema = new Schema({
     sunny: {type: Number }, //1 full overcast, 3 medium cloudy, 5 no clouds
 });
 
+const spendingSchema = new Schema({
+    amount: { type: Number }, // rounded to whole
+    item: { type: String },
+    time: {type: Date, default: Date.now}
+})
+
 
 function MakeSchemaDict() {
     const schemas = {
+        moodLevelSchema: moodLevelSchema,
         energySchema: energySchema,
         happinessSchema: happinessSchema,
+        contentSchema: contentSchema,
+        satisfiedSchema: satisfiedSchema,
         boredSchema: boredSchema,
         stressedSchema: stressedSchema,
         depressionSchema: depressionSchema,
@@ -120,6 +150,7 @@ function MakeSchemaDict() {
         sexSchema: sexSchema,
         exerciseSchema: exerciseSchema,
         timeOutsideSchema: timeOutsideSchema,
+        spendingSchema: spendingSchema,
     }
     return schemas;
 }
