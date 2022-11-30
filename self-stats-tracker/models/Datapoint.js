@@ -6,25 +6,39 @@ const { Schema } = mongoose;
 const schemas = MakeSchemaDict();
 
 const datapointSchema = new Schema({
+    //mood stuff
     energy: { type: schemas.moodLevelSchema },
     happiness: { type: schemas.moodLevelSchema },
     content: { type: schemas.moodLevelSchema },
-    satisfied: { type: schemas.moodLevelSchema },
+    optimism: { type: schemas.moodLevelSchema },
     bored: { type: schemas.moodLevelSchema },
     stressed: { type: schemas.moodLevelSchema },
     depression: { type: schemas.moodLevelSchema },
     detached: { type: schemas.moodLevelSchema },
     clearheaded: { type: schemas.moodLevelSchema },
+
+    //time sense
     pace_of_time: { type: schemas.paceOfTimeSchema },
-    hours_on_task: { type: schemas.hoursOnTaskSchema },
+
+    //hours on, quality, type, focus
+    tasks: { type: [schemas.taskSchema] },
+
+    //consumption
     food: { type: schemas.foodSchema },
     water: { type: schemas.waterSchema },
-    poop: { type: schemas.poopSchema },
+    drink: { type: [schemas.drinkSchema] },
     drug_use: { type: [schemas.drugUseSchema] },
+
+    //other functions
+    poop: { type: schemas.poopSchema },
     sex: { type: schemas.sexSchema },
     exercise: { type: schemas.exerciseSchema },
+
     time_outside: { type: schemas.timeOutsideSchema },
-    spending: { type: schemas.spendingSchema },
+    screen_time: { type: schemas.screenTimeSchema },
+    spending: { type: [schemas.spendingSchema] },
+    notable_events: { type: [schemas.notableEventsSchema]},
+    //of datapoint
 	time: {
 		type: Date,
 		default: Date.now
