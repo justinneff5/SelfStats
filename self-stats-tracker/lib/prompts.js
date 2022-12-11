@@ -14,7 +14,7 @@ const eveningNotif =
     "Good evening! Time to reflect on the day."
 
 const moodPrompt =
-    "Rank the following 1-10. Please put a line break between each number entry.\nEnergy\nHappiness\nContentment\nOptimism\nBoredom\nStress\Depression\nDetached\nClearheaded\nPace of Time"
+    "Rank the following 1-10. Please put a line break between each number entry.\nEnergy\nHappiness\nContentment\nOptimism\nBoredom\nStress\Depression\nDetached\nClearheaded\nStability\nEmpathy\nImpulsivity\nConfidence\nContemplation"
 
 const poTPrompt =
     "Rank the pace of time 1-5."
@@ -73,13 +73,21 @@ const regretPrompt =
 const reflectionPrompt = 
     "Any reflections or other notes on the day? This is journal-esque, write whatever."
 
+const mediaPrompt = 
+    "Any media consumed? List of <type, film name/site, time, opt: thoughts on it>"
+
 const morningText = [
     morningNotif,
     moodPrompt,
     healthPrompt,
+    medicationPrompts[0],
+    medicationPrompts[1],
 ];
 
+//skip med prompt if data loaded from morning
 const checkinText = [
+    medicationPrompts[0],
+    medicationPrompts[1],
     datapointNotif,
     moodPrompt,
     poTPrompt,
@@ -93,9 +101,9 @@ const checkinText = [
     spendingPrompt,
     healthPrompt,
     drugUsePrompt,
-]
+    mediaPrompt
+];
 
+const endOfDayText = [
 
-
-
-
+];

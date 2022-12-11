@@ -3,6 +3,7 @@ const twilioSID = process.env.TWILIO_SID;
 const twilioAuth = process.env.TWILIO_TOKEN;
 const client = require('twilio')(twilioSID, twilioAuth);
 
+//randomize send time
 export default async function handler(req, res) {
 	try {
 		await client.messages.create({
